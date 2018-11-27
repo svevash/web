@@ -1,0 +1,135 @@
+* {
+    background-color: #65A6D1;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper{
+margin: 20px auto;
+height: 500px;
+}
+.menu {
+    margin: 30px;
+}
+
+.menu ul {
+    display: inline-table;
+    position: relative;
+}
+
+.menu li {
+    float: left;
+    list-style: none;
+    width: 160px;
+    text-align: center;
+}
+
+.menu li a {
+    display: block;
+    color: #FFDA73;
+    font-family: Arial;
+    font-size: large;
+    font-weight: bold;
+    text-decoration: none;
+    background: #966BD6;
+    padding: 10px;
+    border: 2px solid #000;
+}
+
+.menu li a:hover {
+    color: #FFDA73;
+    background: #03426A;
+}
+
+.menu ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+}
+
+.menu ul ul li {
+    float: none;
+    position: relative;
+}
+
+.menu ul ul ul {
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+.menu ul li:hover > ul {
+    display: block;
+}
+
+
+ 
+.left_sidebar{
+width: 16%;
+height: 100%;
+float: left;
+background: #FAFABF;
+padding: 2%;;
+}
+ 
+.content{
+width: 56%;
+height: 100%;
+float: left;
+background: #E0E0E0;
+padding: 2%;
+}
+ 
+.right_sidebar{
+width: 16%;
+height: 100%;
+float: left;
+background: #DBA0F0;
+padding: 2%;
+}
+ 
+.footer{
+clear: both;
+background: #A9B4FF;
+padding: 2%;
+}
+ 
+.leftpic{
+	display: block;
+	margin: 0 auto;
+	height: 200px;
+}
+ 
+/* МЕДИА ЗАПРОС для ширины в 800px */
+@media only screen and (max-width : 800px),
+only screen and (max-device-width : 800px){
+     
+    .content{
+    width: 76%;
+    }
+ 
+    .left_sidebar{
+        clear: both;
+        width: 96%;
+        height: 200px;
+    }
+}
+ 
+/* МЕДИА ЗАПРОС для ширины в 600px */
+@media only screen and (max-width : 600px),
+only screen and (max-device-width : 600px){
+     
+    .content{
+        width: 96%;
+    }
+    
+    .left_sidebar{
+        width: 96%;
+        clear: both;
+    }
+
+    .right_sidebar{
+        width: 96%;
+        clear:both;
+    }
+}
