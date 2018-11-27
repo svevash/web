@@ -66,7 +66,7 @@ height: 500px;
 	width: 16%;
 	height: 100%;
 	float: left;
-	background: #FAFABF;
+	background: #FFDC73;
 	padding: 2%;
 }
  
@@ -74,7 +74,7 @@ height: 500px;
 	width: 56%;
 	height: 100%;
 	float: left;
-	background: #E0E0E0;
+	background: #996AD6;
 	padding: 2%;
 }
  
@@ -82,14 +82,22 @@ height: 500px;
 	width: 16%;
 	height: 100%;
 	float: left;
-	background: #DBA0F0;
+	background: #FFDC73;
 	padding: 2%;
+}
+
+.right_sidebar img{
+	width: 70%;
+	display: block;
+	margin: 0 auto;
+	padding: 3%;
+	background: #FFDC73;
 }
  
 .footer{
 	clear: both;
 	background: #A9B4FF;
-	padding: 5px;
+	text-align: left;
 }
  
 .leftpic{
@@ -121,6 +129,11 @@ only screen and (max-device-width : 800px){
 	.right_sidebar{
 		width: 18%;
 	}
+
+	.right_sidebar a{
+		background: #FFDC73;
+		padding: 2%;	
+	}
 }
 
 @media only screen and (max-width : 600px),
@@ -146,15 +159,31 @@ only screen and (max-device-width : 600px){
 
     .right_sidebar{
         width: 100%;
+        height: 200px;
         clear:both;
         padding: 5px;
     }
+
+    .right_sidebar a{
+    	width: 27%;
+		float: left;
+		padding: 2%;
+		margin: 0 auto;
+		background: #FFDC73;
+    }   
 }
 
 @media only screen and (min-width : 1500px),
 only screen and (min-device-width : 1500px){
 	
 	.leftpic{
+		width: 50%;
+	}
+
+	.right_sidebar a{
+		background: #FFDC73;
+	}
+	.right_sidebar img{
 		width: 50%;
 	}
 }
