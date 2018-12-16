@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+     
+      <title></title>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    
+      <link rel="stylesheet" type="text/css" href="styleb.css">
+  
+    </head>
+    <body>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Супер-пупер сайт</a>  
+        </div>
+
+      
+        <ul class="nav navbar-nav">
+          <li><a href="file:///C:/Users/Svetlana/Desktop/web/bootstrap/boots.html#">Главная</a></li>
+          <li class="active"><a href="file:///C:/Users/Svetlana/Desktop/web/bootstrap/kuda_to.html">Куда-то</a></li>
+          <li class="disabled"><a href="#">10 за бутстрап</a></li>
+          <li class="root">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Задания</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Почти соц-сеть</a></li>
+                <li><a href="#">Почти база данных</a></li>
+                  <li><a href="#">Для души</a></li>
+
+                  <li class="divider"></li>
+                  <li class="dropdown-submenu"> <a href="#">Другое...</a>
+                      <ul class="dropdown-menu">
+                          <li><a href="file:///C:/Users/Svetlana/Desktop/web/bootstrap/svg.html">Котек</a>
+                          </li>
+                          <li><a href="file:///C:/Users/Svetlana/Desktop/web/bootstrap/mathML.html">Математека</a>
+                          </li>
+                      </ul>
+                  </li>             
+              </ul>
+          </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+      <ol class="breadcrumb">
+            <li><a href="#" class="btn btn-warning" data-toggle="tooltip" title="Посмотри направо!">Заблудился?<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+            <li><a href="file:///C:/Users/Svetlana/Desktop/web/bootstrap/boots.html#">Главная</a></li>
+            <li class="active">Куда-то</li>
+      </ol>
+    </div>
+    
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-8">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#panel1">Украшения</a></li>
+            <li><a data-toggle="tab" href="#panel2">Подарки</a></li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                Другое... 
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a data-toggle="tab" href="#panel3">Как одеться</a></li>
+                <li><a data-toggle="tab" href="#panel4">Праздничный стол</a></li>
+              </ul>
+            </li>
+          </ul>
+         
+          <div class="tab-content">
+            <div id="panel1" class="tab-pane fade in active">
+              <h3>Чем елочку украсить?</h3>
+              <p>Гирляндой, шарами и игрушками.</p>
+            </div>
+            <div id="panel2" class="tab-pane fade">
+              <h3>Куда положить подарки?</h3>
+              <p>Никуда, за вас это сделает Дед Мороз.</p>
+            </div>
+            <div id="panel3" class="tab-pane fade">
+              <h3>Одежда?</h3>
+              <p>Наденьте что-нибудь красивое.</p>
+            </div>
+            <div id="panel4" class="tab-pane fade">
+              <h3>А что, вы не знаете?</h3>
+              <p>Оливье, селедка под шубой и все в таком духе.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-sm-4">
+            <img src="4.jpg" class="img-rounded" style="width: 100%">
+        </div>
+    </div>
+      </div>
+      
+    
+
+  <script>
+    $('#myModal').modal("toggle");
+
+      $('#myModal').on('shown.bs.modal', function (event) {
+      // функции
+    alert ("Выполенно");
+    });
+  </script>
+  <script>
+    $(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    $('#my-tabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
+    $('#my-tabs a[href="#life"]').tab('show') // селектор по имени
+    $('#my-tabs a:first').tab('show') // выбор первой вкладки
+    $('#my-tabs a:last').tab('show') // последняя вкладка
+    $('#my-tabs li:eq(2) a').tab('show') // выбор вкладки по номеру
+  </script>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+</html>
