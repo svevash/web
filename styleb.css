@@ -1,6 +1,6 @@
 
 body{
-    background: #EAFC71;
+    background: #F3FDC4;
 }
 
 .dropdown-submenu{
@@ -54,4 +54,12 @@ body{
 
 .root:hover > .dropdown-menu{
     display: block;
+}
+
+.breadcrumb{
+    background: #E7DAF9;
+}
+
+.navbar.navbar-default{
+    background: #FDDAE5;
 }
