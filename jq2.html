@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+	<meta charset="utf-8">
+	<title>2</title>
+</head>
+<body>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script>
+		var data = [
+		{
+			text: 'Животные',
+			children: [
+			{
+				text: 'Млекопитающие',
+				children: [
+				{
+					text: 'Коровы',
+					children: []
+				},
+				{
+					text: 'Ослы',
+					children: []
+				},
+				{
+					text: 'Собаки',
+					children: []
+				},
+				{
+					text: 'Тигры',
+					children: []
+				}
+				]
+			},
+			{
+				text: 'Другие',
+				children: [
+				{
+					text: 'Змеи',
+					children: []
+				},
+				{
+					text: 'Птицы',
+					children: []
+				},
+				{
+					text: 'Ящерицы',
+					children: []
+				}
+				]
+			}
+			]
+		},
+		{
+			text: 'Рыбы',
+			children: [
+			{
+				text: 'Аквариумные',
+				children: [
+				{
+					text: 'Гуппи',
+					children: []
+				},
+				{
+					text: 'Скалярии',
+					children: []
+				}
+				]
+			},
+			{
+				text: 'Морские',
+				children: [
+				{
+					text: 'Морская форель',
+					children: []
+				}
+				]
+			}
+			]
+		}];
+		function recCreate(obj)
+		{
+			var element = $("<li>");
+			element.text(obj.text)
+			
+			if (obj.children.length != 0)
+			{
+				var elementUL = $("<ul>");				
+				for (var i = 0; i < obj.children.length; i++)
+					elementUL.append(recCreate(obj.children[i]))
+				
+				element.append(elementUL)
+			}
+			return element;
+		}
+		var element = $("<ul>");
+		for (var i = 0; i < data.length; i++)
+			element.append(recCreate(data[i]))
+		$('body').append(element);
+		$("li").click(function(e){
+			e.stopPropagation();
+			$(this).children("ul").slideToggle('slow');
+		});
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		$( "li" ).each(function() {
+			var t = $(this).clone().children("ul").remove().end();
+		    console.log( "Text: " + t.text() + "\r\nCount li: " + $(this).find("li").length );
+		});
+	</script>
+</body>
+</html>
