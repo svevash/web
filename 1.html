@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+	<meta charset="utf-8">
+	<title>1</title>
+</head>
+<body>
+	<script>
+		var data = [
+		{
+			text: 'Животные',
+			children: [
+			{
+				text: 'Млекопитающие',
+				children: [
+				{
+					text: 'Коровы',
+					children: []
+				},
+				{
+					text: 'Ослы',
+					children: []
+				},
+				{
+					text: 'Собаки',
+					children: []
+				},
+				{
+					text: 'Тигры',
+					children: []
+				}
+				]
+			},
+			{
+				text: 'Другие',
+				children: [
+				{
+					text: 'Змеи',
+					children: []
+				},
+				{
+					text: 'Птицы',
+					children: []
+				},
+				{
+					text: 'Ящерицы',
+					children: []
+				}
+				]
+			}
+			]
+		},
+		{
+			text: 'Рыбы',
+			children: [
+			{
+				text: 'Аквариумные',
+				children: [
+				{
+					text: 'Гуппи',
+					children: []
+				},
+				{
+					text: 'Скалярии',
+					children: []
+				}
+				]
+			},
+			{
+				text: 'Морские',
+				children: [
+				{
+					text: 'Морская форель',
+					children: []
+				}
+				]
+			}
+			]
+		}];
+		/* 5.1 */
+		function recCreate(obj)
+		{
+			var element = document.createElement("li");
+			element.innerText = obj.text
+			if (obj.children.length != 0)
+			{
+				var elementUL = document.createElement("ul");
+				for (var i = 0; i < obj.children.length; i++)
+					elementUL.append(recCreate(obj.children[i]))
+				
+				element.append(elementUL)
+			}
+			return element;
+		}
+		var element = document.createElement("ul");
+		for (var i = 0; i < data.length; i++)
+			element.append(recCreate(data[i]))
+		document.body.insertBefore(element, document.getElementsByTagName("script")[0]);
+		/* ~5.1 */
+		/* 5.2 */
+		function recGetInfo(obj)
+		{
+			var infoNode = {node: obj, props: []}
+			for(var key in obj)
+			    infoNode.props.push(key + ": " + obj[key])
+			console.log(infoNode)
+			for (var i = 0; i < obj.children.length; i++)
+				recGetInfo(obj.children[i])
+		}
+		recGetInfo(document.documentElement)
+		/* ~5.2 */
+	</script>
+</body>
+</html>
