@@ -1,0 +1,293 @@
+<html>
+<head>
+	<title>Canvas & Mootools</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js"></script>
+	<script type="text/javascript">
+		var canvas, ctx, balls, idTimer;
+		
+
+
+		TBall = new Class({
+			initialize: function(pX,pY) {
+				this.posX = pX; //позиция шарика по X
+				this.posY = pY; //позиция шарика по Y
+				//цвет шарика, формируется случайным оьразом
+				this.colBall = 'rgb('+Math.floor(Math.random()*256)+','
+				+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+				// радиус шарика, случайное число от 5 до 30
+				this.rBall = 5+Math.random()*25;
+				this.direct;
+			},
+			posX: 0,
+			posY: 0,
+			colBall:"rgb(0,0,0)",
+			rBall: 0,
+			colorBall: function(ctx){
+				// формируем градиентную заливку для шарика
+				with (this){
+					var gradient = ctx.createRadialGradient(posX+rBall/4,
+					posY-rBall/6, rBall/8, posX, posY, rBall);
+					gradient.addColorStop(0, '#fff');
+					gradient.addColorStop(0.85, colBall);
+					return gradient;
+				}
+			},
+			draw : function(ctx){
+				// рисуем шарик на canvas
+				with (this){
+					ctx.fillStyle = colorBall(ctx);
+					ctx.beginPath();
+					ctx.arc(posX, posY, rBall, 0, 2*Math.PI, false);
+					ctx.closePath();
+					ctx.fill();
+				}
+			}
+		});
+		
+
+
+
+		/*const TFig = function(posX, posY) {
+			this.radius = 5+Math.random()*25;
+			this.posX = posX;
+			this.posY = posY;
+			this.col = 'rgb('+Math.floor(Math.random()*256)+','
+				+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+			this.direct;
+			this.pointDraw = function() {
+				ctx.fillStyle = this.col
+				ctx.beginPath()
+				this.absPoints.length = 0
+				this.absPoints.push({x:this.posX + this.points[0].x * this.radius, y:this.posY + this.points[0].y * this.radius})
+				
+				ctx.moveTo(this.absPoints[0].x, this.absPoints[0].y)
+				let linesBuf = []
+				linesBuf.push(this.absPoints[0])
+				this.lines.length = 0
+				for (var i = 1; i < this.points.length; i++){
+					this.absPoints.push({x:this.posX + this.points[i].x * this.radius, y:this.posY + this.points[i].y * this.radius})
+					linesBuf.push(this.absPoints[i])
+					if (linesBuf.length >= 2) {
+						this.lines.push(linesBuf.slice())
+						linesBuf.splice(0, 1)
+					}
+					ctx.lineTo(this.absPoints[i].x, this.absPoints[i].y)
+				}
+				if (linesBuf.length % 2 === 1) {
+					this.lines.push([linesBuf[0], this.absPoints[0]])
+				}
+				ctx.closePath()
+				ctx.fillStyle = this.col
+				ctx.fill()
+			}
+			this.colorBall: function(ctx){
+				// формируем градиентную заливку для шарика
+				with (this){
+					var gradient = ctx.createRadialGradient(posX+rBall/4,
+					posY-rBall/6, rBall/8, posX, posY, rBall);
+					gradient.addColorStop(0, '#fff');
+					gradient.addColorStop(0.85, colBall);
+					return gradient;
+				}
+			},
+		}
+		const TBall = function(posX, posY){
+			TFig.apply(this, arguments)
+			this.draw = function() {
+				ctx.fillStyle = this.col
+				ctx.beginPath()
+				//ctx.arc(this.posX, this.posY, this.radius/2, 0, 2*Math.PI, false)
+				ctx.arc(this.posX, this.posY, this.radius, 0, 2*Math.PI, false);
+				ctx.closePath()
+				ctx.fill()
+			}
+		}
+		const TTriangle = function(posX, posY) {
+			TFig.apply(this, arguments)
+			this.points = [{x:0, y:-0.5}, {x:0.5, y:0.5}, {x:-0.5, y:0.5}]
+			this.absPoints = []
+			this.lines = []
+			this.draw = this.pointDraw
+		}
+		const TSquare = function(posX, posY) {
+			TFig.apply(this, arguments)
+			this.points = [{x:-0.5, y:0.5}, {x:0.5, y:0.5}, {x:0.5, y:-0.5}, {x:-0.5, y:-0.5}]
+			this.absPoints = []
+			this.lines = []
+			this.draw = this.pointDraw
+		}
+
+*/
+
+		function drawBack(ctx,col1,col2,w,h){
+			// закрашиваем канвас градиентным фоном
+			ctx.save();
+			var g = ctx.createLinearGradient(0,0,0,h);
+			g.addColorStop(1,col1);
+			g.addColorStop(0,col2);
+			ctx.fillStyle = g;
+			ctx.fillRect(0,0,w,h);
+			ctx.restore();
+		}
+		// инициализация работы
+		function init(){
+			canvas = document.getElementById('canvas');
+			if (canvas.getContext){
+				ctx = canvas.getContext('2d');
+				//рисуем фон
+				drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+				//создаем 10 шариков, заноси их в массив и выводим на canvas
+				balls = [];
+				/*for (var i = 1; i<=20;i++){
+					var item = new TSquare(10+Math.random()*(canvas.width-30),
+					10+Math.random()*(canvas.height-30));
+					item.draw(ctx);
+					balls.push(item);
+				}
+				*/for (var i = 1; i<=20;i++){
+					var item = new TBall(10+Math.random()*(canvas.width-30),
+					10+Math.random()*(canvas.height-30));
+					item.draw(ctx);
+					balls.push(item);
+				}
+				/*for (var i = 1; i<=20;i++){
+					var item = new TTriangle(10+Math.random()*(canvas.width-30),
+					10+Math.random()*(canvas.height-30));
+					item.draw(ctx);
+					balls.push(item);
+				}*/
+				var interval
+				canvas.addEventListener('mousedown', function(e){
+					if (interval) return
+					setInterval(goInput(e), 200)
+				}, true)
+				document.addEventListener('mouseup', function(){
+					if (!interval) return
+					clearInterval(interval)
+					interval = null
+					
+				}, true)
+				moveBall()
+			}
+		}
+		// создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
+		function goInput(event){
+			var x = event.clientX;
+			var y = event.clientY;
+			/*var item = randomInteger(1,3);
+			if (item == 1){
+				item = new TSquare(x,y)
+			}
+			else if (item == 2){
+				*/item = new TBall(x,y)
+			/*}
+			else if (item == 3){
+				item = new TTriangle(x,y)
+			}*/
+			item.draw(ctx);
+			balls.push(item);
+		}
+		function randomInteger(min, max) {
+    		var rand = min + Math.random() * (max + 1 - min);
+    		rand = Math.floor(rand);
+    		return rand;
+  		}
+		function moveBall(movement){
+			//реализация движения шариков, находящихся в массиве balls
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			var m = movement;
+			for (var i = 0; i < balls.length;i){
+				if (movement == 5){
+					m = randomInteger(1,4);
+				}
+				
+				if (movement == 6){
+					if (balls[i].direct == 1){
+						balls[i].posX = balls[i].posX + (Math.random()*4-2);
+						balls[i].posY = balls[i].posY + (Math.random()*2-4);
+					}
+					else if (balls[i].direct == 2){
+						balls[i].posX = balls[i].posX - (Math.random()*4-2);
+					    balls[i].posY = balls[i].posY - (Math.random()*2-4);
+					}
+					else if (balls[i].direct == 3){
+						balls[i].posX = balls[i].posX - (Math.random()*2-4);
+					    balls[i].posY = balls[i].posY + (Math.random()*4-2);
+					}
+					else if (balls[i].direct == 4){
+						balls[i].posX = balls[i].posX + (Math.random()*2-4);
+					    balls[i].posY = balls[i].posY - (Math.random()*4-2);
+					};
+				}
+
+				if (m == 1){
+					balls[i].posX = balls[i].posX + (Math.random()*4-2);
+					balls[i].posY = balls[i].posY + (Math.random()*2-4);
+				}
+				else if (m == 2){
+					balls[i].posX = balls[i].posX - (Math.random()*4-2);
+				    balls[i].posY = balls[i].posY - (Math.random()*2-4);
+				}
+				else if (m == 3){
+					balls[i].posX = balls[i].posX - (Math.random()*2-4);
+				    balls[i].posY = balls[i].posY + (Math.random()*4-2);
+				}
+				else if (m == 4){
+					balls[i].posX = balls[i].posX + (Math.random()*2-4);
+				    balls[i].posY = balls[i].posY - (Math.random()*4-2);
+				};
+				balls[i].draw(ctx);
+
+				increaseRad(balls[i]);
+				
+				if ( balls[i].rBall > 50){
+					balls.splice(i, 1);
+				}
+				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0)) 
+					balls.splice(i,1);
+				else 
+					i++;
+			}
+		}
+		function move(movement){
+			clearInterval(idTimer);
+			if (movement == 1)
+				idTimer = setInterval('moveBall(1);',50)
+			else if (movement == 2)
+				idTimer = setInterval('moveBall(2);',50)
+			else if (movement == 3)
+				idTimer = setInterval('moveBall(3);',50)
+			else if (movement == 4)
+				idTimer = setInterval('moveBall(4);',50)
+			else if (movement == 5)
+				idTimer = setInterval('moveBall(5)',50)
+			else if (movement == 6){
+				for (var i = 0; i < balls.length;i++){
+					balls[i].direct = randomInteger(1,4);
+				}
+				idTimer = setInterval('moveBall(6)',50)
+			};
+		
+		}
+		function increaseRad(b){
+			b.rBall = b.rBall + 0.3;
+		}
+	</script>
+	<style type="text/css">
+		canvas { border: 1px solid blue; }
+	</style>
+</head>
+<body onload="init();">
+	<canvas id="canvas" width="600" height="400" onclick="goInput(event);">
+	</canvas>
+	<form>
+		<input type = "button" value = "Движение вверх" onclick="move(1)">
+		<input type = "button" value = "Движение вниз" onclick="move(2)">
+		<input type = "button" value = "Движение вправо" onclick="move(3)">
+		<input type = "button" value = "Движение влево" onclick="move(4)">
+		<input type = "button" value = "Хаос" onclick="move(5)">
+		<input type = "button" value = "Рандом" onclick="move(6)">
+		<input type = "button" value = "Стоп" onclick="clearInterval(idTimer);">
+	</form>
+</body>
+</html>
